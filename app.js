@@ -12,11 +12,6 @@ export const db = new Pool({
   ssl: {
     rejectUnauthorized: true,
   },
-  // user: "postgres",
-  // host: "localhost",
-  // database: "school",
-  // password: "password",
-  // port: 5432,
 });
 
 try {
@@ -59,6 +54,4 @@ app.use((err, _, res, next) => {
   res.json({ message: err });
 });
 
-app.listen(process.env.PORT, () => {
-  console.log(`Server is running on port ${process.env.PORT}`);
-});
+export default app;
