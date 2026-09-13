@@ -34,18 +34,18 @@ async function GetUserData(_, res, next) {
 }
 
 app.get("/users", GetUserData);
-app.get("/users/:id", async (req, res) => {
-  const singleUser = await db.query("SELECT * FROM users WHERE id=$1", [
-    req.params.id,
-  ]);
-  res.json({ data: singleUser.rows });
-});
-// app.get("/users/:id", userHandeler.GetUserById);
+// app.get("/users/:id", async (req, res) => {
+//   const singleUser = await db.query("SELECT * FROM users WHERE id=$1", [
+//     req.params.id,
+//   ]);
+//   res.json({ data: singleUser.rows });
+// });
+app.get("/users/:id", userHandeler.GetUserById);
 app.post("/users", userHandeler.PostUsers);
+app.put("/users/:id", userHandeler.updateUserById);
+app.patch("/users/:id", userHandeler.updateUserById);
 app.delete("/users/:id", userHandeler.DeleteUsers);
-app.patch("/users", (req, res) => {
-  res.send("Hello World");
-});
+
 app.delete("/users", (req, res) => {
   res.send("Hello World");
 });
@@ -54,4 +54,7 @@ app.use((err, _, res, next) => {
   res.json({ message: err });
 });
 
-export default app;
+// export default app;
+app.listen(process.env.PORT, () => {
+  console.log(`Server is running on port ${process.env.PORT}`);
+});
